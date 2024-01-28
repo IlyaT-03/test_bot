@@ -1,0 +1,5 @@
+aiogram==3.3.0
+python-dotenv==1.0.1
+soundfile==0.12.1
+opencv-python==4.9.0.80
+librosa==0.10.1
