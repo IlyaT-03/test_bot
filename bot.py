@@ -15,10 +15,6 @@ bot = Bot(token=os.getenv('TOKEN'))
 dp = Dispatcher()
 
 
-async def on_startup():
-    await db.db_start()
-
-
 # handler for the /start command
 @dp.message(Command("start"))
 async def cmd_start(message: types.Message):
@@ -45,7 +41,8 @@ async def handle_audio(message: types.Message, bot: Bot):
 
 # Launching polling
 async def main():
-    await dp.start_polling(bot, on_startup=on_startup)
+    await db.db_start()
+    await dp.start_polling(bot)
 
 
 if __name__ == "__main__":
