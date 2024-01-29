@@ -23,8 +23,10 @@ async def save_photo(message: types.Message, bot: Bot):
         filename = f'{user_id}_{str(num_files)}.jpg'
         full_filename = os.path.join(path, filename)
         await bot.download(photo, destination=full_filename)
+        await message.reply('Photo with a face saved')
     except Exception as exc:
         print(exc)
+        await message.reply('Sorry, something went wrong')
 
 
 async def save_audio(message: types.Message, bot: Bot):
@@ -43,8 +45,9 @@ async def save_audio(message: types.Message, bot: Bot):
         await bot.download(audio, destination=full_filename)
         data, samplerate = librosa.load(full_filename, sr=necessary_samplerate)
         wav_filename = full_filename[:-3] + 'wav'
-        with sf.SoundFile(wav_filename, 'rw') as f:
-            sf.write(data, necessary_samplerate)
+        sf.write(wav_filename, data, necessary_samplerate)
         os.remove(full_filename)
+        await message.reply('Audio saved as a .wav file')
     except Exception as exc:
         print(exc)
+        await message.reply('Sorry, something went wrong')

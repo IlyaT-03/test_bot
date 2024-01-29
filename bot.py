@@ -33,7 +33,6 @@ async def handle_photo(message: types.Message, bot: Bot):
     await bot.download(message.photo[-1], destination=img_stream)
     if contains_face(img_stream):
         await db.save_photo(message, bot)
-        await message.reply('Photo with a face saved')
     else:
         await message.reply('No face in this photo')
 
@@ -42,7 +41,6 @@ async def handle_photo(message: types.Message, bot: Bot):
 @dp.message(F.voice | F.audio)
 async def handle_audio(message: types.Message, bot: Bot):
     await db.save_audio(message, bot)
-    await message.reply('Audio saved as a .wav file')
 
 
 # Launching polling
