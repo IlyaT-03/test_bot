@@ -17,7 +17,7 @@ async def save_photo(message: types.Message, bot: Bot):
     try:
         photo = message.photo[-1]
         user_id = message.from_user.id
-        path = Path(f"videos/{user_id}")
+        path = Path(f"photos/{user_id}")
         path.mkdir(parents=True, exist_ok=True)
         num_files = len(os.listdir(path=path))
         filename = f'{user_id}_{str(num_files)}.jpg'
